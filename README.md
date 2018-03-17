@@ -1,1 +1,1 @@
-"# trendchecker" 
+# trendchecker

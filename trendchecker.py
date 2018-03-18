@@ -63,9 +63,9 @@ def validate_memo(memo):
         return False
         
 while 1:
-    gen1= ac.get_account_history(-1,500,filter_by=['transfer'])
+    transfers = ac.get_account_history(-1,500,filter_by=['transfer'])
 
-    for i in gen1:
+    for i in transfers:
         if (i["to"]==acc_name):
             if(i["memo"]!=""):
                 if (validate_memo(i["memo"])==True):

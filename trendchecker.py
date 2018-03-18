@@ -63,7 +63,7 @@ def validate_memo(memo):
         return False
         
 while 1:
-    gen1= ac.get_account_history(-1500,filter_by=['transfer'])
+    gen1= ac.get_account_history(-1,500,filter_by=['transfer'])
 
     for i in gen1:
         if (i["to"]==acc_name):

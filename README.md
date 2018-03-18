@@ -10,9 +10,11 @@
 <code>
 git clone https://github.com/ko-redtruck/trendchecker
 </code>
+<br>
 <code>
 cd trendchecker  
 </code>
+<br>
 <code>
 python3 trendchecker.py
 </code>

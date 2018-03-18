@@ -3,6 +3,7 @@
 ### requirements
 - Python 3.6
 - [steem-python](https://github.com/steemit/steem-python)
+- requests
 
 ## functionality
 

@@ -1,9 +1,13 @@
 from steem import Steem
+from steem import account
+import requests
 import json
 
 node = ["https://api.steemit.com"]
+acc_name = "wil1liam"
 
 s = Steem(node)
+ac= account.Account(acc_name,s)
 
 def check_trending(url):
 
@@ -46,3 +50,23 @@ def check_trending(url):
                 print(count2)
                 break
             count3 += 1
+
+def validate_memo(memo):
+    try:
+        request = requests.get(memo)
+        if (request.status_code == 200):
+            return True
+        else:
+            return False
+
+    except:
+        return False
+        
+while 1:
+    gen1= ac.get_account_history(-1500,filter_by=['transfer'])
+
+    for i in gen1:
+        if (i["to"]==acc_name):
+            if(i["memo"]!=""):
+                if (validate_memo(i["memo"])==True):
+                    check_trending(i["memo"])            

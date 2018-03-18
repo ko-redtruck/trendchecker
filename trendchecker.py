@@ -5,6 +5,7 @@ import json
 
 node = ["https://api.steemit.com"]
 acc_name = "wil1liam"
+trx_list = json.load(open("trx_list.json"))
 
 s = Steem(node)
 ac= account.Account(acc_name,s)
@@ -61,12 +62,22 @@ def validate_memo(memo):
 
     except:
         return False
+  
+def add_to_trx_list(trx_id):
+    trx_list["trx_id"].append(trx_id)
+
+    with open('trx_list.json', 'w') as outfile:
+        json.dump(trx_list, outfile)
+    
         
 while 1:
-    transfers = ac.get_account_history(-1,500,filter_by=['transfer'])
+    transfers = ac.get_account_history(-1,500,filter_by=['transfer']
 
     for i in transfers:
-        if (i["to"]==acc_name):
-            if(i["memo"]!=""):
-                if (validate_memo(i["memo"])==True):
-                    check_trending(i["memo"])            
+        if(i["trx_id"] not in trx_list["trx_id"]):
+            if (i["to"]==acc_name):
+                if(i["memo"]!=""):
+                    if (validate_memo(i["memo"])==True):
+
+                        add_to_trx_list(i["trx_id"])
+                        check_trending(i["memo"])

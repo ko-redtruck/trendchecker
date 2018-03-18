@@ -71,7 +71,7 @@ def add_to_trx_list(trx_id):
     
         
 while 1:
-    transfers = ac.get_account_history(-1,500,filter_by=['transfer']
+    transfers = ac.get_account_history(-1,500,filter_by=['transfer'])
 
     for i in transfers:
         if(i["trx_id"] not in trx_list["trx_id"]):

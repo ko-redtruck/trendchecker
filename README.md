@@ -9,8 +9,11 @@
 #### 3. execute these commands
 <code>
 git clone https://github.com/ko-redtruck/trendchecker
+  
 cd trendchecker  
+
 python3 trendchecker.py
+
 </code>
 
 

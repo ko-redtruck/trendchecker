@@ -1,9 +1,18 @@
 # trendchecker
-
-### requirements
+## instructions
+#### 1. get a computer that runs 24/7 without going into sleep mode ( I use a raspberry pi 3)
+#### 2. install all requirements
 - Python 3.6
 - [steem-python](https://github.com/steemit/steem-python)
 - requests
+
+#### 3. execute these commands
+<code>
+git clone https://github.com/ko-redtruck/trendchecker
+cd trendchecker  
+python3 trendchecker.py
+</code>
+
 
 ## functionality
 

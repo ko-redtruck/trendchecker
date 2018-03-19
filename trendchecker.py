@@ -62,7 +62,12 @@ def validate_memo(memo):
 
     except:
         return False
-  
+    
+def send_back(trx,memo):
+    amount,asset = trx["amount"].split(" ")
+    sender = trx["from"]
+    s.commit.transfer(sender,amount,asset,memo,account=acc_name)
+    
 def add_to_trx_list(trx_id):
     trx_list["trx_id"].append(trx_id)
 
@@ -80,4 +85,6 @@ while 1:
                     if (validate_memo(i["memo"])==True):
 
                         add_to_trx_list(i["trx_id"])
-                        check_trending(i["memo"])
+                        #response = generate_memo(i["memo"])
+                        send_back(i,response)
+

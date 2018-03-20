@@ -6,7 +6,7 @@
 - [steem-python](https://github.com/steemit/steem-python)
 - requests
 
-#### 3. execute these commands
+#### 3. 
 <code>
 git clone https://github.com/ko-redtruck/trendchecker
 </code>
@@ -15,6 +15,10 @@ git clone https://github.com/ko-redtruck/trendchecker
 cd trendchecker  
 </code>
 <br>
+
+#### 4. edit the settings.json with your details
+
+#### 5. 
 <code>
 python3 trendchecker.py
 </code>

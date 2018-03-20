@@ -81,6 +81,40 @@ def add_to_trx_list(trx_id):
 
     with open('trx_list.json', 'w') as outfile:
         json.dump(trx_list, outfile)
+        
+def refund(username):
+    sent_amount_SBD = 0
+    received_amount_SBD = 0
+    sent_amount_STEEM = 0
+    received_amount_STEEM = 0
+
+    refund_transfers = ac.get_account_history(-1,1000,filter_by=['transfer'])
+
+    for i in refund_transfers:
+        if (i["from"]==username):
+            if(i["amount"].split(" ")[1]=="SBD"):
+                sent_amount_SBD += float(i["amount"].split(" ")[0])
+            if(i["amount"].split(" ")[1]=="STEEM"):
+                sent_amount_STEEM += float(i["amount"].split(" ")[0])
+
+        if (i["to"]==username):
+            if(i["amount"].split(" ")[1]=="SBD"):
+                received_amount_SBD += float(i["amount"].split(" ")[0])
+            if(i["amount"].split(" ")[1]=="STEEM"):
+                received_amount_STEEM += float(i["amount"].split(" ")[0])
+
+    refundable_SBD = sent_amount_SBD - received_amount_SBD
+    refundable_STEEM = sent_amount_STEEM - received_amount_STEEM
+
+    print(refundable_SBD)
+    print(refundable_STEEM)
+    if (refundable_SBD>0):
+        s.commit.transfer(username,refundable_SBD,"SBD","your SBD refund",account=acc_name)
+        print("sending " + str(refundable_SBD)+"SBD back")
+
+    if (refundable_STEEM>0):
+        print("sending " + str(refundable_STEEM)+"steem back")
+        s.commit.transfer(username,refundable_STEEM,"STEEM","your STEEM refund",account=acc_name)
     
         
 while 1:
@@ -88,6 +122,11 @@ while 1:
 
     for i in transfers:
         if(i["trx_id"] not in trx_list["trx_id"]):
+            
+            if (i["memo"]=="refund"):
+                add_to_trx_list(i["trx_id"])
+                refund(i["from"])
+                
             if (i["to"]==acc_name):
                 if(i["memo"]!=""):
                     if (validate_memo(i["memo"])==True):

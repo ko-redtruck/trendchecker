@@ -4,8 +4,11 @@ import requests
 import json
 
 node = ["https://api.steemit.com"]
-acc_name = "wil1liam"
 trx_list = json.load(open("trx_list.json"))
+settings = json.load(open("settings.json"))
+
+acc_name = settings["account name"]
+keys=[settings["private posting key"], settings["private active key"]]
 
 s = Steem(node)
 ac= account.Account(acc_name,s)

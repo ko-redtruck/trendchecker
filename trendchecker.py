@@ -10,7 +10,7 @@ settings = json.load(open("settings.json"))
 acc_name = settings["account name"]
 keys=[settings["private posting key"], settings["private active key"]]
 
-s = Steem(node)
+s = Steem(node,keys=keys)
 ac= account.Account(acc_name,s)
 
 def check_trending(url):

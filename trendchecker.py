@@ -87,10 +87,10 @@ def send_back(trx,memo):
     amount,asset = trx["amount"].split(" ")
     sender = trx["from"]
     s.commit.transfer(sender,amount,asset,memo,account=acc_name)
+    print("sending " + str(amount) + " to " + sender)
 
 def generate_memo(url):
     memo = check_trending(url)
-    memo = memo
     return memo    
     
 def add_to_trx_list(trx_id):
@@ -110,6 +110,6 @@ while 1:
                     if (validate_memo(i["memo"])==True):
 
                         add_to_trx_list(i["trx_id"])
-                        #response = generate_memo(i["memo"])
+                        response = generate_memo(i["memo"])
                         send_back(i,response)
 

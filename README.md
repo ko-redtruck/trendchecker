@@ -28,7 +28,10 @@ python3 trendchecker.py
 ## functionality
 
 #### basics
-- return for every tag from your post how high your post is ranking in the hot/trending/promoted section
+- tells you how high your post is ranking within the top 100 in hot/trending/promoted 
 
 #### "user interface"
 - send any amount of SBD/STEEM --> execute the baisc function --> send money back with a memo containing the information  
+
+#### experimental/ upcoming features
+- in case your transaction wasn't sent back you can try to send one again with the memo "refund" --> every transaction to the bot which hasn't been sent back will now be refunded and sent back

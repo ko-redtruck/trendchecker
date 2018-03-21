@@ -14,12 +14,16 @@ s = Steem(node,keys=keys)
 ac= account.Account(acc_name,s)
 
 def check_trending(url):
-
+    
+    memo = "TRENDCHECKER by @wil1liam: "
     #post to check
-    author = url.split("/")[4].replace("@","")
-    post_identifier = url.split("/")[5]
-    post = s.get_content(author,post_identifier)
-    tags = json.loads(post["json_metadata"])["tags"] + list([""])
+    try:
+        author = url.split("/")[4].replace("@","")
+        post_identifier = url.split("/")[5]
+        post = s.get_content(author,post_identifier)
+        tags = json.loads(post["json_metadata"])["tags"] + list([""])
+    except:
+        return "TRENDCHECKER error! wrong url or post doesn't exist..."
 
 
     for i in tags:
@@ -30,12 +34,18 @@ def check_trending(url):
         count1 = 1
         count2 = 1
         count3 = 1
-
+        
+        if (i==""):
+            memo += "All: "
+        else:
+            memo += i + ": "
+            
         for o in trending_posts:
             if (o["author"]==author):
                 print("trending---")
                 print(i+ " --tag")
                 print(count1)
+                memo += str(count1)  +". in trending, "
                 break
             count1 += 1
 
@@ -44,6 +54,7 @@ def check_trending(url):
                 print("hot---")
                 print(i+ " --tag")
                 print(count2)
+                memo += str(count2)  +". in hot "
                 break
             count2 += 1
 
@@ -52,8 +63,14 @@ def check_trending(url):
                 print("promoted---")
                 print(i + " --tag")
                 print(count2)
+                memo += str(count3)  +". in promoted"
                 break
             count3 += 1
+            
+        memo += ", "
+        
+    return memo 
+ 
 
 def validate_memo(memo):
     try:

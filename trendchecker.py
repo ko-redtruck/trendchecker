@@ -2,6 +2,7 @@ from steem import Steem
 from steem import account
 import requests
 import json
+import time
 
 node = ["https://api.steemit.com"]
 trx_list = json.load(open("trx_list.json"))
@@ -101,7 +102,12 @@ def add_to_trx_list(trx_id):
     
         
 while 1:
-    transfers = ac.get_account_history(-1,500,filter_by=['transfer'])
+    try:
+        transfers = ac.get_account_history(-1,500,filter_by=['transfer'])
+    except:
+        time.sleep(30)
+        s = Steem(node,keys=keys)
+        ac= account.Account(acc_name,s)
 
     for i in transfers:
         if(i["trx_id"] not in trx_list["trx_id"]):

@@ -102,20 +102,21 @@ def add_to_trx_list(trx_id):
     
         
 while 1:
+   
+    transfers = ac.get_account_history(-1,500,filter_by=['transfer'])
+    
     try:
-        transfers = ac.get_account_history(-1,500,filter_by=['transfer'])
+        for i in transfers:
+            if(i["trx_id"] not in trx_list["trx_id"]):
+                if (i["to"]==acc_name):
+                    if(i["memo"]!=""):
+                        if (validate_memo(i["memo"])==True):
+
+                            add_to_trx_list(i["trx_id"])
+                            response = generate_memo(i["memo"])
+                            send_back(i,response)               
     except:
         time.sleep(30)
         s = Steem(node,keys=keys)
         ac= account.Account(acc_name,s)
-
-    for i in transfers:
-        if(i["trx_id"] not in trx_list["trx_id"]):
-            if (i["to"]==acc_name):
-                if(i["memo"]!=""):
-                    if (validate_memo(i["memo"])==True):
-
-                        add_to_trx_list(i["trx_id"])
-                        response = generate_memo(i["memo"])
-                        send_back(i,response)
 

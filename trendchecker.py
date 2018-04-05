@@ -74,10 +74,10 @@ def validate_memo(memo):
         return False
     
 def send_back(trx,memo):
-    amount,asset = trx["amount"].split(" ")
+    asset = trx["amount"].split(" ")[1]
     sender = trx["from"]
-    s.commit.transfer(sender,amount,asset,memo,account=acc_name)
-    print("sending " + str(amount) + " to " + sender)
+    s.commit.transfer(sender,0.001,asset,memo,account=acc_name)
+    print("sending " + "0.001" + " to " + sender)
 
 def generate_memo(url):
     memo = check_trending(url)

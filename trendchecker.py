@@ -4,7 +4,7 @@ import requests
 import json
 import time
 
-node = ["https://api.steemit.com"]
+node = ["https://rpc.buildteam.io","https://api.steemit.com"]
 trx_list = json.load(open("trx_list.json"))
 upvote_list = json.load(open("upvotes.json"))
 settings = json.load(open("settings.json"))
@@ -115,7 +115,9 @@ while 1:
 
                             add_to_trx_list(i["trx_id"])
                             response = generate_memo(i["memo"])
-                            send_back(i,response)               
+                            
+                            post_identifier = i["memo"].split("/")[4].replace("@","") + "/" + i["memo"].split("/")[5]
+                            send_back(i,response,post_identifier)               
     except:
         time.sleep(30)
         s = Steem(node,keys=keys)

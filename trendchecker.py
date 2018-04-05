@@ -28,13 +28,11 @@ def check_trending(url):
 
 
     for i in tags:
-        trending_posts = s.get_discussions_by_trending({"limit":100,"tag":i.replace("-","")})
-        hot_posts = s.get_discussions_by_hot({"limit":100,"tag":i})
-        promoted_posts = s.get_discussions_by_promoted({"limit":100,"tag":i})
+        trending_posts = s.get_discussions_by_trending({"limit":50,"tag":i})
+        hot_posts = s.get_discussions_by_hot({"limit":50,"tag":i})
 
         count1 = 1
         count2 = 1
-        count3 = 1
         
         if (i==""):
             memo += "All: "
@@ -58,15 +56,6 @@ def check_trending(url):
                 memo += str(count2)  +". in HOT "
                 break
             count2 += 1
-
-        for o in promoted_posts:
-            if (o["author"]==author):
-                print("promoted---")
-                print(i + " --tag")
-                print(count2)
-                memo += str(count3)  +". in promoted"
-                break
-            count3 += 1
             
         memo += "| "
         

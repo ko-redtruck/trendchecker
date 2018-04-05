@@ -6,6 +6,7 @@ import time
 
 node = ["https://api.steemit.com"]
 trx_list = json.load(open("trx_list.json"))
+upvote_list = json.load(open("upvotes.json"))
 settings = json.load(open("settings.json"))
 
 acc_name = settings["account name"]
@@ -73,12 +74,23 @@ def validate_memo(memo):
     except:
         return False
     
-def send_back(trx,memo):
+def send_back(trx,memo,post_identifier):
     asset = trx["amount"].split(" ")[1]
     sender = trx["from"]
     s.commit.transfer(sender,0.001,asset,memo,account=acc_name)
     print("sending " + "0.001" + " to " + sender)
+    
+    if(post_identifier not in upvote_list["post_identifier"]):
+        s.commit.vote(post_identifier,100,account=acc_name)
+        body = "Hello, <br> I'm bot. I am here because " + "@" +sender + " wanted to know how high this post is in Hot or Trending. <br><br> You want to know what your post's rank in Hot or Trending is? <br><br> 1. copy your Steemit.com post url <br> 2. send 0.001 SBD/STEEM to @trendchecker with the url as the memo <br> 3. wait 20 seconds to receive the results <br><br> <b> As a gift your post will be upvoted for free! </b> <br> <hr>- This bot was development by @wil1liam."
+        s.commit.post("",body,author=acc_name, reply_identifier="@"+post_identifier)
+        print("commented")
+        
+        upvote_list["post_identifier"].append(post_identifier)
 
+        with open('upvotes.json', 'w') as outfile:
+            json.dump(upvote_list, outfile)
+        
 def generate_memo(url):
     memo = check_trending(url)
     return memo    

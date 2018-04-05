@@ -46,7 +46,7 @@ def check_trending(url):
                 print("trending---")
                 print(i+ " --tag")
                 print(count1)
-                memo += str(count1)  +". in trending, "
+                memo += str(count1)  +". in TRENDING "
                 break
             count1 += 1
 
@@ -55,7 +55,7 @@ def check_trending(url):
                 print("hot---")
                 print(i+ " --tag")
                 print(count2)
-                memo += str(count2)  +". in hot "
+                memo += str(count2)  +". in HOT "
                 break
             count2 += 1
 
@@ -68,7 +68,7 @@ def check_trending(url):
                 break
             count3 += 1
             
-        memo += ", "
+        memo += "| "
         
     return memo 
  

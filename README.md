@@ -35,3 +35,7 @@ python3 trendchecker.py
 
 #### experimental/ upcoming features
 - in case your transaction wasn't sent back you can try to send one again with the memo "refund" --> every transaction to the bot which hasn't been sent back will now be refunded and sent back
+
+
+[![HitCount](http://hits.dwyl.io/ko-redtruck/trendchecker.svg)](http://hits.dwyl.io/ko-redtruck/trendchecker)
+
